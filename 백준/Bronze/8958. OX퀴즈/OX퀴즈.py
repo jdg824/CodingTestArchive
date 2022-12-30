@@ -1,3 +1,6 @@
+#리스트 반복문 이용할때 13번째줄
+#리스트의 요소를 직접적으로 접근할 수 있음
+
 import sys
 input = sys.stdin.readline
 
