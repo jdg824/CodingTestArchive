@@ -1,30 +1,3 @@
-'''''
-import sys
-input = sys.stdin.readline
-cnt = {}
-
-word = input()
-u_word = word.upper()
-w_list = list(u_word)
-
-for i in w_list:
-    if i in cnt:
-        cnt[i] += 1
-    else:
-        cnt[i] = 1
-
-print(cnt)
-
-max = 1
-for i in w_list:
-    if(cnt[i] >= max):
-        max = cnt[i]
-    else:
-        max = 0
-
-print(max)
-'''''
-
 dict = {}
 
 import sys
