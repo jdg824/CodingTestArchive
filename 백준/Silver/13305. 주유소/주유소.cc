@@ -4,40 +4,33 @@
 using namespace std;
 
 int main() {
-	int n, cost = 0;
-	vector <int> load, money;
+	long long n, cost = 0;
+	long long now;
+	vector <long long> load, money;
 
 	cin >> n;
 
 	for (int i = 0; i < n - 1; i++) {
-		int len;
+		long long len;
 		cin >> len;
 		load.push_back(len);
 	}
 
 	for (int i = 0; i < n; i++) {
-		int gas;
+		long long gas;
 		cin >> gas;
-
-		if(i < n-1)
-			money.push_back(gas);
+		money.push_back(gas);
 	}
 
-	for (int i = 0; i < n - 1; i++) {
-		int cnt = 0;
-		for (int j = i + 1; j < n - 1; j++) {
-			if (money[i] > money[j])
-				cnt++;
-		}
+	now = money[0];
 
-		if (cnt == 0) {
-			for (int j = i; j < n - 1; j++)
-				cost += (money[i] * load[j]);
-			
-			break;
+	for (int i = 0; i < n - 1; i++) {
+		if (now < money[i])
+			cost += (now * load[i]);
+		else {
+			now = money[i];
+			cost += (now * load[i]);
 		}
-		else
-			cost += (money[i] * load[i]);
 	}
 
 	cout << cost;
