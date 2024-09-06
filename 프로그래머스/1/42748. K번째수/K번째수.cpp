@@ -8,17 +8,18 @@ vector<int> solution(vector<int> array, vector<vector<int>> commands) {
     vector<int> answer;
     
     for(int i =0; i<commands.size(); i++){
-        vector<int> test;
-        int f_idx = commands[i][0] -1;
-        int e_idx = commands[i][1] -1;
-        int find = commands[i][2]-1;
+        vector<int> v;
+        int a = commands[i][0];
+        int b = commands[i][1];
+        int c = commands[i][2];
         
-        for(int j = f_idx; j<=e_idx; j++)
-            test.push_back(array[j]);
+        for(int j =a-1; j<=b-1; j++){
+            v.push_back(array[j]);
+        }
         
-        sort(test.begin(), test.end());
+        sort(v.begin(),v.end());
         
-        answer.push_back(test[find]);
+        answer.push_back(v[c-1]);
     }
     
     return answer;
