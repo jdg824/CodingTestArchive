@@ -1,4 +1,5 @@
 #include <iostream>
+#include <algorithm>
 
 using namespace std;
 
@@ -7,31 +8,19 @@ int main() {
 
 	cin >> str;
 
-	int zero = 0;
-	int one = 0;
+	int count[2] = { 0, 0 };
 
-	char tmp_0 = '0';
-	char tmp_1 = '1';
+	char ch = str[0];
 
-	for (int i = 0; i < str.size(); i++) {
-		if (str[i] != tmp_0) {
-			tmp_0 = str[i];
-			zero++;
-
-			if (tmp_0 == '0')
-				zero--;
-		}
-
-		if (str[i] != tmp_1) {
-			tmp_1 = str[i];
-			one++;
-
-			if (tmp_1 == '1')
-				one--;
+	for (int i = 1; i < str.size(); i++) {
+		if (ch != str[i]) {
+			count[ch - '0']++;
+			ch = str[i];
 		}
 	}
+	count[ch - '0']++;
 
-	cout << min(zero, one);
+	cout << *min_element(count, count + 2);
 
 	return 0;
 }
