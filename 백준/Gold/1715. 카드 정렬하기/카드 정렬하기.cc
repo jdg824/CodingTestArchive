@@ -5,48 +5,40 @@
 using namespace std;
 
 int main() {
+	priority_queue<int, vector<int>, greater<int>> q;
 	int n;
-	priority_queue <int, vector<int>, greater<>> q;
-	vector <int> v;
+	vector<int> v;
 
 	cin >> n;
 
 	for (int i = 0; i < n; i++) {
-		int dq;
+		int a;
 
-		cin >> dq;
-		q.push(dq);
+		cin >> a;
+
+		q.push(a);
 	}
 
-	int sum = 0;
-
-	if (q.size() == 1)
-		cout << 0;
-	else {
-		while (1) {
-			int first, second;
-
-			if (q.size() == 1)
-				break;
-
-			first = q.top();
+	if (q.size() >= 2) {
+		while (q.size() != 1) {
+			int a = q.top();
 			q.pop();
-
-			second = q.top();
+			v.push_back(a);
+			int b = q.top();
 			q.pop();
-
-			sum = first + second;
-
-			v.push_back(sum);
-			q.push(sum);
+			v.push_back(b);
+			q.push(a + b);
+		}
+		
+		int sum = 0;
+		for (int i = 0; i < v.size(); i++) {
+			sum += v[i];
 		}
 
-		int total = 0;
-
-		for (int i = 0; i < v.size(); i++)
-			total += v[i];
-
-		cout << total;
+		cout << sum;
+	}
+	else {
+		cout << 0;
 	}
 
 	return 0;
