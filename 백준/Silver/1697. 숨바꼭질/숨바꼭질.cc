@@ -3,49 +3,47 @@
 
 using namespace std;
 
-int n, k;
+int s, e;
+int graph[100001] = { 0, };
+bool chk[100001] = { 0, };
 
-int dx[3] = { -1, 1, 2 };
-
-int v[100001] = { 0, };
-int value[100001] = { 0, };
-bool check[100001] = { 0, };
+int dx[3] = { -1,1,2 };
 
 int bfs(int start) {
 	queue<int> q;
 
 	q.push(start);
-	check[start] = true;
+	chk[start] = true;
 
 	while (!q.empty()) {
 		int x = q.front();
 		q.pop();
 
-		if (x == k)
-			return value[x];
+		if (x == e) {
+			return graph[e];
+		}
 
 		for (int i = 0; i < 3; i++) {
-			int nx;
-			if (i == 2)
-				nx = x * dx[i];
+			int rx;
+
+			if (dx[i] == 2)
+				rx = x * dx[i];
 			else
-				nx = x + dx[i];
-			
-			if (nx >= 0 && nx < 100001) {
-				if (!check[nx]) {
-					check[nx] = true;
-					q.push(nx);
-					value[nx] = value[x] + 1;
-				}
+				rx = x + dx[i];
+
+			if (rx >= 0 && rx < 100001 && chk[rx]==false) {
+				q.push(rx);
+				chk[rx] = true;
+				graph[rx] = graph[x] + 1;
 			}
 		}
 	}
 }
 
 int main() {
-	cin >> n >> k;
+	cin >> s >> e;
 
-	cout << bfs(n);
+	cout << bfs(s);
 
 	return 0;
 }
