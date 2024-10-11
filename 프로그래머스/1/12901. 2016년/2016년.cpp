@@ -14,8 +14,6 @@ string solution(int a, int b) {
         allday += month[i];
     allday += b;
     
-    
-    
     answer = day[allday%7];
     
     return answer;
