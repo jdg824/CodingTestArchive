@@ -9,13 +9,11 @@ int solution(vector<int> elements) {
     set<int> s;
     
     for(int i=0; i<elements.size(); i++){
-        int num = elements[i];
-        for(int j =0; j<elements.size(); j++){
-            int sum = 0;
-            for(int k=0; k<=j; k++){
-                sum += elements[(i+k)%elements.size()];
-            }
-            s.insert(sum);
+        int sum = 0;
+        
+        for(int j=i; j<elements.size() + i; j++){
+            sum += elements[j%elements.size()];
+            s.insert(sum);    
         }
     }
     
