@@ -1,23 +1,29 @@
 #include <iostream>
-#include <string>
-#include <vector>
 
 using namespace std;
 
+string search[8] = { "c=", "c-", "dz=", "d-", "lj", "nj", "s=", "z=" };
+int len[8] = { 2, 2, 3, 2, 2, 2, 2, 2 };
+
 int main() {
-	vector <string>cro = { "c=", "c-", "dz=", "d-", "lj", "nj", "s=", "z=" };
 	string str;
+	int cnt = 0;
+	int idx = 0;
 
 	cin >> str;
 
 	for (int i = 0; i < 8; i++) {
-		while (1) {
-			if (str.find(cro[i]) != -1)
-				str.replace(str.find(cro[i]), cro[i].length(), "!");
-			else
+		while (1)
+		{
+			idx = str.find(search[i]);
+
+			if (idx == string::npos)
 				break;
+			str.replace(idx, len[i], " ");
 		}
 	}
 
-	cout << str.length();
+	cout << str.size();
+	
+	return 0;
 }
