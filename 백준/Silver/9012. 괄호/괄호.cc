@@ -4,35 +4,42 @@
 using namespace std;
 
 int main() {
-	int n, tsk = 0;
-	string str;
+	int num;
 
-	cin >> n;
+	cin >> num;
 
-	for (int i = 0; i < n; i++) {
+	for (int i = 0; i < num; i++)
+	{
+		string str;
+		stack<int> st;
+		int flag = 0;
+
 		cin >> str;
 
-		stack <char>st;
-		tsk = 0;
 		for (int j = 0; j < str.size(); j++) {
-			if (str[j] == '(')
-				st.push(str[j]);
-
-			if (str[j] == ')')
-			{
-				if (!st.empty())
-					st.pop();
-				else {
-					tsk = 1;
+			if (str[j] == ')') {
+				if (st.size() == 0) {
+					cout << "NO" << "\n";
+					flag = 1;
 					break;
 				}
+				else {
+					st.pop();
+				}
+			}
+			else{
+				st.push(1);
 			}
 		}
-		
-		if (!st.empty() || tsk==1)
-			cout << "NO\n";
-		else
-			cout << "YES\n";
+		if (flag == 0) {
+			if (st.size() == 0)
+			{
+				cout << "YES" << "\n";
+			}
+			else {
+				cout << "NO" << "\n";
+			}
+		}
 	}
 
 	return 0;
