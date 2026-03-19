@@ -1,33 +1,51 @@
 #include <iostream>
-#include <vector>
+#include <map>
+#include <stack>
 
 using namespace std;
 
 int main() {
-	int num;
-	string st;
-	int count = 0;
-	int sum = 0;
+	int n;
+	int cnt = 0;
 
-	cin >> num;
+	cin >> n;
 
-	for (int i = 0; i < num; i++) {
-		cin >> st;
+	for (int i = 0; i < n; i++) {
+		map<char, int> m;
+		stack<char> st;
+		string str;
+		bool chk = 0;
 
-		for (int j = 0; j < st.length(); j++) {
-			if (st[j] != st[j + 1]) {
-				for (int k = j + 1; k < st.length(); k++) {
-					if (st[j] == st[k])
-						count++;
+		cin >> str;
+
+		st.push(str[0]);
+		m[str[0]]++;
+
+		for (int j = 1; j < str.size(); j++) {
+			if (st.top() != str[j]) {
+				//cout << str[j] << " " << m[str[j]] <<"\n";
+				if (m[str[j]] == 0) {
+					st.push(str[j]);
+					m[str[j]]++;
 				}
+				else {
+					chk = 1;
+					break;
+				}
+			}
+			else {
+				st.push(str[j]);
 			}
 		}
 
-		if (count == 0)
-			sum++;
-		count = 0;
+		if (chk == 0)
+		{
+			cnt++;
+			//cout << str << "\n";
+		}
 	}
-	cout << sum;
+
+	cout << cnt;
 
 	return 0;
 }
