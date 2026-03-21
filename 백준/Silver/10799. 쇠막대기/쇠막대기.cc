@@ -5,27 +5,25 @@ using namespace std;
 
 int main() {
 	string str;
-	int piece = 0, sum = 0, poll = 0;
+	stack<char> st;
+	int cnt = 0;
 
 	cin >> str;
 
-	for (int i = 0; i < str.length(); i++) {
-		if (str[i] == '(') {
-			piece++;
-			if (str[i + 1] == '(')
-				poll++;
-			else if (str[i + 1] == ')') {
-				piece--;
-				sum += piece;
-				i++;
-			}
+	for (int i = 0; i < str.size(); i++) {
+		if (str[i] == '(' && str[i+1] == ')') {
+			cnt += st.size();
+			i++;
 		}
+		else if (str[i] == '(')
+			st.push('(');
 		else if (str[i] == ')') {
-			piece--;
+			cnt++;
+			st.pop();
 		}
 	}
 
-	cout << sum + poll;
+	cout << cnt;
 
 	return 0;
 }
