@@ -5,23 +5,30 @@ using namespace std;
 
 int main() {
 	int n, k;
-	vector <int>v;
+	vector<int> money;
+	int cnt = 0;
 
 	cin >> n >> k;
 
 	for (int i = 0; i < n; i++) {
-		int money;
-		cin >> money;
+		int data;
 
-		v.push_back(money);
+		cin >> data;
+
+		money.push_back(data);
 	}
 
-	int idx = v.size() - 1;
-	int cnt = 0;
+	int idx = money.size() - 1;
 
-	while (k > 0) {
-		cnt += k / v[idx];
-		k %= v[idx];
+	while (1) {
+		if (k == 0)
+			break;
+
+		if (k / money[idx] != 0) {
+			cnt += (k / money[idx]);
+			k %= money[idx];
+		}
+
 		idx--;
 	}
 
