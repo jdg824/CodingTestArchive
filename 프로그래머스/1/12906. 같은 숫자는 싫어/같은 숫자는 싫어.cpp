@@ -1,17 +1,21 @@
 #include <vector>
 #include <iostream>
-#include <algorithm>
+#include <map>
 
 using namespace std;
 
 vector<int> solution(vector<int> arr) 
 {
     vector<int> answer;
+    int chk = arr[0];
     
-    arr.erase(unique(arr.begin(), arr.end()), arr.end());
+    answer.push_back(chk);
+    for(int i=1; i<arr.size(); i++){
+        if(chk!=arr[i]){
+            answer.push_back(arr[i]);
+            chk = arr[i];
+        }
+    }
     
-    for(int i=0; i<arr.size(); i++)
-        answer.push_back(arr[i]);
-
     return answer;
 }
