@@ -1,28 +1,19 @@
 #include <iostream>
 #include <vector>
-#include <queue>
 
 using namespace std;
 
+vector<int> graph[1001];
+bool chk[1001] = { 0, };
+
 int n, m;
-vector<int> map[1001];
-bool check[1001] = { 0, };
 
-void bfs(int x) {
-	queue <int>q;
+void dfs(int start) {
+	chk[start] = true;
 
-	q.push(x);
-	check[x] = true;
-
-	while (!q.empty()) {
-		int r_x = q.front();
-		q.pop();
-
-		for (int i = 0; i < map[r_x].size(); i++) {
-			if (!check[map[r_x][i]]) {
-				check[map[r_x][i]] = true;
-				q.push(map[r_x][i]);
-			}
+	for (int i = 0; i < graph[start].size(); i++) {
+		if (chk[graph[start][i]] == 0) {
+			dfs(graph[start][i]);
 		}
 	}
 }
@@ -33,17 +24,18 @@ int main() {
 	cin >> n >> m;
 
 	for (int i = 0; i < m; i++) {
-		int u, v;
-		cin >> u >> v;
+		int start, end;
 
-		map[u].push_back(v);
-		map[v].push_back(u);
+		cin >> start >> end;
+
+		graph[start].push_back(end);
+		graph[end].push_back(start);
 	}
 
 	for (int i = 1; i <= n; i++) {
-		if (check[i] == 0) {
-			bfs(i);
+		if (chk[i] == 0) {
 			cnt++;
+			dfs(i);
 		}
 	}
 
